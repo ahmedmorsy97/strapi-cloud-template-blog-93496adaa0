@@ -512,6 +512,8 @@ export interface PluginContentReleasesRelease extends Schema.CollectionType {
   attributes: {
     name: Attribute.String & Attribute.Required;
     releasedAt: Attribute.DateTime;
+    scheduledAt: Attribute.DateTime;
+    timezone: Attribute.String;
     actions: Attribute.Relation<
       'plugin::content-releases.release',
       'oneToMany',
@@ -792,6 +794,11 @@ export interface ApiAboutAbout extends Schema.SingleType {
   options: {
     draftAndPublish: false;
   };
+  pluginOptions: {
+    versions: {
+      versioned: true;
+    };
+  };
   attributes: {
     title: Attribute.String;
     blocks: Attribute.DynamicZone<
@@ -811,6 +818,15 @@ export interface ApiAboutAbout extends Schema.SingleType {
       'admin::user'
     > &
       Attribute.Private;
+    versions: Attribute.Relation<
+      'api::about.about',
+      'manyToMany',
+      'api::about.about'
+    >;
+    vuid: Attribute.String;
+    versionNumber: Attribute.Integer & Attribute.DefaultTo<1>;
+    versionComment: Attribute.String;
+    isVisibleInListView: Attribute.Boolean & Attribute.DefaultTo<true>;
   };
 }
 
@@ -824,6 +840,11 @@ export interface ApiArticleArticle extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: true;
+  };
+  pluginOptions: {
+    versions: {
+      versioned: true;
+    };
   };
   attributes: {
     title: Attribute.String;
@@ -846,6 +867,7 @@ export interface ApiArticleArticle extends Schema.CollectionType {
     blocks: Attribute.DynamicZone<
       ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
     >;
+    Test: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -861,6 +883,15 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    versions: Attribute.Relation<
+      'api::article.article',
+      'manyToMany',
+      'api::article.article'
+    >;
+    vuid: Attribute.String;
+    versionNumber: Attribute.Integer & Attribute.DefaultTo<1>;
+    versionComment: Attribute.String;
+    isVisibleInListView: Attribute.Boolean & Attribute.DefaultTo<true>;
   };
 }
 
@@ -874,6 +905,11 @@ export interface ApiAuthorAuthor extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
+  };
+  pluginOptions: {
+    versions: {
+      versioned: true;
+    };
   };
   attributes: {
     name: Attribute.String;
@@ -898,6 +934,15 @@ export interface ApiAuthorAuthor extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    versions: Attribute.Relation<
+      'api::author.author',
+      'manyToMany',
+      'api::author.author'
+    >;
+    vuid: Attribute.String;
+    versionNumber: Attribute.Integer & Attribute.DefaultTo<1>;
+    versionComment: Attribute.String;
+    isVisibleInListView: Attribute.Boolean & Attribute.DefaultTo<true>;
   };
 }
 
@@ -911,6 +956,11 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
+  };
+  pluginOptions: {
+    versions: {
+      versioned: true;
+    };
   };
   attributes: {
     name: Attribute.String;
@@ -935,6 +985,15 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    versions: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::category.category'
+    >;
+    vuid: Attribute.String;
+    versionNumber: Attribute.Integer & Attribute.DefaultTo<1>;
+    versionComment: Attribute.String;
+    isVisibleInListView: Attribute.Boolean & Attribute.DefaultTo<true>;
   };
 }
 
@@ -948,6 +1007,11 @@ export interface ApiGlobalGlobal extends Schema.SingleType {
   };
   options: {
     draftAndPublish: false;
+  };
+  pluginOptions: {
+    versions: {
+      versioned: true;
+    };
   };
   attributes: {
     siteName: Attribute.String & Attribute.Required;
@@ -968,6 +1032,15 @@ export interface ApiGlobalGlobal extends Schema.SingleType {
       'admin::user'
     > &
       Attribute.Private;
+    versions: Attribute.Relation<
+      'api::global.global',
+      'manyToMany',
+      'api::global.global'
+    >;
+    vuid: Attribute.String;
+    versionNumber: Attribute.Integer & Attribute.DefaultTo<1>;
+    versionComment: Attribute.String;
+    isVisibleInListView: Attribute.Boolean & Attribute.DefaultTo<true>;
   };
 }
 
